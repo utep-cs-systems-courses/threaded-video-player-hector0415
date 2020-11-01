@@ -35,6 +35,7 @@ def main():
 class extract(Thread):
     def __init__(self,video):
         Thread.__init__(self)
+        self.video = video
         
     def run(self):
         vid = self.video
@@ -92,7 +93,7 @@ class display(Thread):
 
                 if cv2.waitKey(self.delay) and 0xFF == ord("q"):
                     break
-                
+
         cv2.destroyAllWindows()
         return
 
