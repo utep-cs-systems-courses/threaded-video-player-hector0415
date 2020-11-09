@@ -23,6 +23,7 @@ class Queue():
         frame = self.queue.pop(0)
         self.lock.release()
         self.empty.release()
+        return frame
 
 class extract(Thread):
     def __init__(self,video):
@@ -46,7 +47,7 @@ class convert(Thread):
         while True:
             frame = rawFrames.get()
             if frame is None:
-                grayFrames.append(None)
+                grayFrames.put(None)
                 return
             grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             grayFrames.put(grayFrame)
